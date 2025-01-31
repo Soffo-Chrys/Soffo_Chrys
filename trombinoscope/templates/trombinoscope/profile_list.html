@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Profils</title>
+</head>
+<body>
+    <h1>Liste des Profils</h1>
+    {% for profile in profiles %}
+        <p>{{ profile.nom }} {{ profile.prenom }}</p>
+    {% endfor %}
+</body>
+</html>

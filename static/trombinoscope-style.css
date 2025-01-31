@@ -1,0 +1,114 @@
+/* Styles généraux */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: #2d3748;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+}
+
+.navbar .nav-link {
+    color: white;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.navbar .nav-link:hover {
+    color: #125f64;
+}
+
+.welcome-message {
+    color: white;
+    font-size: 1em;
+}
+
+/* Titre principal */
+.main-title {
+    text-align: center;
+    color: #244e96;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    margin: 20px 0;
+    text-shadow: 2px 2px #d6d6d6;
+}
+
+/* Conteneur des cartes */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 20px;
+}
+
+.student-card {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    background: white;
+    text-align: center;
+}
+
+.student-card:hover {
+    transform: scale(1.05);
+}
+
+.student-photo {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+}
+
+.student-details {
+    padding: 10px;
+    color: #555;
+}
+
+.student-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.student-email,
+.student-phone {
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+/* Bouton Voir les CV */
+.buttons {
+    margin-top: 15px;
+}
+
+.btn-view-cv button {
+    background-color: #34aa90;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-view-cv button:hover {
+    background-color: #45a098;
+}

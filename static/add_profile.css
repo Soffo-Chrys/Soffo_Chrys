@@ -1,0 +1,27 @@
+body{
+    background-color: rgba(0, 255, 255, 0.116);
+}
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.submit-button, .back-button {
+    background-color: #1fc41a;
+    
+    color: rgba(0, 0, 0, 0.705);
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.submit-button:hover, .back-button:hover {
+    background-color: #45a070;
+}
+/* si apres une modification rien ne se passe et faur vider la cache du navigateur et recharger les fichers statisque
+avec la commande python manage.py collectstatic et yes */

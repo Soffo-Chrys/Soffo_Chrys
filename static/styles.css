@@ -1,0 +1,108 @@
+/* styles.css */
+
+
+
+.trombinoscope-container {
+    text-align: center;
+    padding: 20px;
+
+}
+
+.trombinoscope-container h1 {
+    color: #2d3748;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #d6d6d6;
+}
+
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.profile-card {
+    position: relative; /* Crée un conteneur pour la superposition */
+    width: 250px; /* Largeur de la carte */
+    height: 350px; /* Hauteur d e la carte */
+    border-radius: 10px; /* Coins arrondis pour le style */
+    overflow: hidden; /* Empêche les débordements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de carte */
+    margin: 10px;
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+}
+
+.profile-image {
+    position: absolute; /* Positionne l'image par rapport à la carte */
+    top: 0;
+    left: 0;
+    width: 100%; /* L'image occupe toute la largeur de la carte */
+    height: 100%; /* L'image occupe toute la hauteur de la carte */
+    object-fit: cover; /* Ajuste l'image sans la déformer */
+    z-index: 1; /* Place l'image derrière */
+    opacity: 0.8; /* Rend l'image semi-transparente pour mieux voir les données */
+}
+
+
+
+.profile-details {
+    position: absolute; /* Données au premier plan */
+    bottom: 0; /* Place les données au bas de la carte */
+    width: 100%; /* S'étend sur toute la largeur de la carte */
+    z-index: 10; /* Place les données au-dessus de l'image */
+    color: #fff; /* Couleur du texte pour contraster avec l'image */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Améliore la lisibilité sur une image */
+    padding: 15px;
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+
+.profile-details h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.profile-details p {
+    font-size: 0.9em;
+    color: #555;
+    margin: 5px 0;
+}
+
+.add-profile-container{
+    text-align: center;
+    margin: 20px;
+}
+.add-profile-bouton{
+    background-color: #4CAF50;
+    background-attachment: inherit;
+    color: aqua;
+    padding: 10px 20px ;/* Augmenter l'espacement interne */
+    text-decoration: navajowhite;
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 19px;/* Taille du texte */
+    cursor: pointer;
+    font-weight: bold; /* Rendre le texte en gras */
+    text-decoration: double;
+    width: 200px; /* Augmenter la largeur du bouton */    
+    display: inline-block;
+    text-align: center;
+}
+.add-profile-bouton:hover{
+    background-color: #45a049;/* Couleur au survol */
+}
+
+
+
+
+
+
+

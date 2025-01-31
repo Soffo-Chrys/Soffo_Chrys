@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des CV - {{ etudiant.prenom }} {{ etudiant.nom }}</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4A90E2;
+            font-size: 3em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* CV list grid */
+        .cv-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            justify-items: center;
+        }
+
+        /* CV Card styles */
+        .cv-card {
+            position: relative;
+            width: 280px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ddd;
+            transform: scale(0.98);
+        }
+
+        .cv-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header style for each CV card */
+        .cv-card-header {
+            background-color: #4A90E2;
+            color: #fff;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: 600;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cv-card-header:hover {
+            background-color: #357ab7;
+        }
+
+        .cv-card-body {
+            padding: 20px;
+        }
+
+        .cv-card-body p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Footer button styles */
+        .cv-card-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cv-card-footer a {
+            display: inline-block;
+        }
+
+        .cv-card-footer button {
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cv-card-footer button:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            background-color: #2d3748;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta button:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Contact info styles */
+        .cv-card-body .contact-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .cv-card-body .contact-info i {
+            margin-right: 10px;
+        }
+
+        .cv-card-body .contact-info .email {
+            color: #FF5722;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .cv-list {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Liste des CV de {{ etudiant.prenom }} {{ etudiant.nom }}</h1>
+
+    <div class="cv-list">
+        {% for cv in cvs %}
+        <div class="cv-card">
+            <div class="cv-card-header">
+                <h3>{{ cv.titre }}</h3>
+            </div>
+            <div class="cv-card-body">
+                <p>{{ cv.description }}</p>
+                <div class="contact-info">
+                    <div><i class="fas fa-phone-alt"></i> +33 1 23 45 67 89</div>
+                    <div class="email"><i class="fas fa-envelope"></i> contact@exemple.com</div>
+                </div>
+            </div>
+            <div class="cv-card-footer">
+                <!-- Remplacement du HTMX par un lien classique -->
+                <a href="{% url 'afficher_cv' cv.id %}">
+                    <button>Voir ce CV</button>
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <p>Aucun CV disponible pour cet étudiant.</p>
+        {% endfor %}
+    </div>
+
+    <div class="cta">
+        <a href="{% url 'trombinoscope' %}">
+            <button>Retour au trombinoscope</button>
+        </a>
+    </div>
+
+    <!-- Font Awesome icons for contact info -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+</body>
+</html>

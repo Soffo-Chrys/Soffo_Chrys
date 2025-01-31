@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ cv.titre }}</title>
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        /* Page Configuration for PDF */
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            page-break-before: always;
+        }
+
+        /* Header */
+        .cv-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cv-header img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #4e73df;
+            margin-bottom: 20px;
+        }
+
+        .cv-header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .cv-header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        /* Section Titles */
+        .cv-section h2 {
+            font-size: 2em;
+            color: #4e73df;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        /* CV Items */
+        .cv-item {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cv-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-item strong {
+            color: #4e73df;
+            font-weight: 600;
+        }
+
+        .cv-item p {
+            margin-top: 5px;
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4e73df;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+            transform: translateY(-2px);
+        }
+
+        .btn-blue {
+            background-color: #00c6ff;
+        }
+
+        .btn-blue:hover {
+            background-color: #007bff;
+        }
+
+        /* Links */
+        a {
+            text-decoration: none;
+            color: #4e73df;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #2c3e50;
+        }
+
+        /* Contact Section */
+        .contact {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .contact a {
+            color: #4e73df;
+            font-size: 1.1em;
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            color: #2c3e50;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cv-header h1 {
+                font-size: 1.8em;
+            }
+
+            .cv-header img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .cv-item p {
+                font-size: 0.9em;
+            }
+
+            button {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="cv-header">
+            <img src="{{ etudiant.photo.url }}" alt="{{ etudiant.nom }} {{ etudiant.prenom }}">
+            <h1>{{ cv.titre }}</h1>
+            <p>{{ cv.description }}</p>
+        </div>
+
+        <div class="cv-section">
+            <h2>Expériences professionnelles</h2>
+            {% for experience in cv.experiences.all %}
+            <div class="cv-item">
+                <p><strong>{{ experience.poste }}</strong> chez {{ experience.entreprise }}</p>
+                <p>{{ experience.date_debut }} - {% if experience.date_fin %}{{ experience.date_fin }}{% else %}actuellement{% endif %}</p>
+                <p>{{ experience.description }}</p>
+            </div>
+            {% empty %}
+                <p>Aucune expérience professionnelle.</p>
+            {% endfor %}
+        </div>
+
+        <div class="cv-section">
+            <h2>Formations</h2>
+            {% for formation in cv.formations.all %}
+            <div class="cv-item">
+                <p><strong>{{ formation.diplome }}</strong>, {{ formation.etablissement }}</p>
+                <p>{{ formation.date_debut }} - {% if formation.date_fin %}{{ formation.date_fin }}{% else %}actuellement{% endif %}</p>
+            </div>
+            {% empty %}
+                <p>Aucune formation.</p>
+            {% endfor %}
+        </div>
+
+        <div class="cv-section">
+            <h2>Compétences</h2>
+            {% for competence in cv.competences.all %}
+            <div class="cv-item">
+                <p><strong>{{ competence.libelle }}</strong>: {{ competence.niveau }}</p>
+            </div>
+            {% empty %}
+                <p>Aucune compétence indiquée.</p>
+            {% endfor %}
+        </div>
+
+        <div class="cv-section">
+            <h2>Projets</h2>
+            {% for projet in cv.projets.all %}
+            <div class="cv-item">
+                <p><strong>{{ projet.titre }}</strong></p>
+                <p>{{ projet.description }}</p>
+                <p>{{ projet.date_debut }} - {% if projet.date_fin %}{{ projet.date_fin }}{% else %}actuellement{% endif %}</p>
+            </div>
+            {% empty %}
+                <p>Aucun projet.</p>
+            {% endfor %}
+        </div>
+
+        <div class="cv-actions">
+            <a href="{% url 'telecharger_cv' cv.id %}" target="_blank">
+                <button>Télécharger en PDF</button>
+            </a>
+            <a href="{% url 'envoyer_cv' cv.id %}">
+                <button class="btn-blue">Envoyer par e-mail</button>
+            </a>
+        </div>
+
+        <div class="contact">
+            <a href="mailto:{{ etudiant.email }}">Email</a>
+            <a href="tel:+33{{ etudiant.telephone }}">Téléphone</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+{% block content %}
+    <style>
+     /* Style pour le bouton de retour à l'accueil */
+    .return-button {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #4CAF50; /* Vert pour l'action de retour */
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: 20px;
+            text-transform: uppercase;
+            width: auto;
+        }
+    
+        /* Effet au survol */
+        .return-button:hover {
+            background-color: #388E3C; /* Vert plus foncé */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+    
+        /* Effet au focus ou clic */
+        .return-button:focus,
+        .return-button:active {
+            outline: none;
+            background-color: #2C6C2F; /* Vert encore plus foncé */
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+     /* Style pour le bouton de retour à l'accueil */
+    .return-button {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #4CAF50; /* Vert pour l'action de retour */
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        text-align: center;
+        margin-top: 20px;
+        text-transform: uppercase;
+        width: auto;
+    }
+
+    /* Effet au survol */
+    .return-button:hover {
+        background-color: #388E3C; /* Vert plus foncé */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* Effet au focus ou clic */
+    .return-button:focus,
+    .return-button:active {
+        outline: none;
+        background-color: #2C6C2F; /* Vert encore plus foncé */
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+    /* Style for links (buttons) inside the tab content */
+    .tab-content a {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #1565c0; /* Bleu principal */
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    /* Hover effect */
+    .tab-content a:hover {
+        background-color: #0d47a1; /* Bleu plus foncé */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* Focus effect */
+    .tab-content a:focus,
+    .tab-content a:active {
+        outline: none;
+        background-color: #003c8f; /* Bleu encore plus foncé */
+        box-shadow: 0 0 10px rgba(21, 101, 192, 0.5);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .tab-content a {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+    }
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #f5f7fa, #e1ecf4);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container for the entire content */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Tabs container */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+            justify-content: space-around;
+        }
+
+        /* Each tab */
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background-color: #f5f7fa;
+            color: #555;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Active tab style */
+        .tab.active {
+            background-color: #1565c0;
+            color: #ffffff;
+            border-bottom: 2px solid #1565c0;
+        }
+
+        .tab:hover {
+            background-color: #1565c0;
+            color: #ffffff;
+        }
+
+        /* Tab content sections */
+        .tab-content {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tab {
+                font-size: 14px;
+                padding: 8px 0;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <h2>Gestion des sections de votre CV</h2>
+        <p>Sélectionnez une section à gérer en cliquant sur l'onglet correspondant :</p>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <button class="tab active" data-tab="competences">Compétences</button>
+            <button class="tab" data-tab="experiences">Expériences</button>
+            <button class="tab" data-tab="formations">Formations</button>
+            <button class="tab" data-tab="langues">Langues</button>
+            <button class="tab" data-tab="projets">Projets</button>
+        </div>
+
+        <!-- Tabs Content -->
+        <div id="competences" class="tab-content active">
+            <a href="{% url 'ajouter_competence' %}">Ajouter vos compétences</a>
+        </div>
+        <div id="experiences" class="tab-content">
+            <a href="{% url 'ajouter_experience' %}">Ajouter vos expériences professionnelles</a>
+        </div>
+        <div id="formations" class="tab-content">
+            <a href="{% url 'ajouter_formation' %}">Ajouter vos formations</a>
+        </div>
+        <div id="langues" class="tab-content">
+            <a href="{% url 'ajouter_langue' %}">Ajouter vos langues</a>
+        </div>
+        <div id="projets" class="tab-content">
+            <a href="{% url 'ajouter_projet' %}">Ajouter vos projets</a>
+        </div>
+        <a href="/" class="return-button">Retour à l'accueil</a>
+    </div>
+
+    <script>
+        // JavaScript for Tab Navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+        });
+    </script>
+{% endblock %}

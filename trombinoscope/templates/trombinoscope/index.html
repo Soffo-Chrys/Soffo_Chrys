@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trombinoscope</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="trombinoscope-container">
+        <h1>Trombinoscope</h1>
+
+        {% if user.is_authenticated %}
+        <p>Bienvenue, {{ user.username }} !</p>
+        <a href="{% url 'logout' %}" class="logout-button">Se déconnecter</a>
+        {% else %}
+        <a href="{% url 'register' %}" class="register-button">S'inscrire</a>
+        <a href="{% url 'login' %}" class="login-button">Se connecter</a>
+        {% endif %}
+
+        <div class="profiles-grid">
+            {% for profile in profiles %}
+                <div class="profile-card">
+                    <img src="{{ profile.image.url }}" alt="Photo de {{ profile.prenom }}" class="profile-image">
+                    <div class="profile-details">
+                        <h2>{{ profile.nom }}</h2>
+                        <p><strong>Prénom:</strong> {{ profile.prenom }}</p>
+                        <p><strong>Fonction:</strong> {{ profile.fonction }}</p>
+                        <p><strong>Téléphone:</strong> {{ profile.telephone }}</p>
+                        <p><strong>Email:</strong> {{ profile.adresse }}</p>
+                        <a href="{% url 'view_cv' profile.id %}" class="btn btn-primary">Voir CV</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>        
+
+        {% if user.is_authenticated %}
+        <div class="add-profile-container">
+            <a href="{% url 'add_profile' %}" class="add-profile-bouton">Ajouter un nouveau profil</a>
+        </div>
+        <div class="create-cv-container">
+            <a href="{% url 'create_cv' %}" class="btn btn-success">Créer CV</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de vos CVs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Style personnalisé */
+        body {
+            background-color: #f4f7fc;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .cv-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .cv-item {
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #007bff;
+        }
+        .cv-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        .cv-item strong {
+            font-size: 1.5em;
+            color: #007bff;
+        }
+        .cv-item p {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .cv-item form {
+            margin-top: 20px;
+        }
+        .btn-danger {
+            background-color:rgb(53, 220, 212);
+            border: none;
+            padding: 12px 24px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .btn-danger:hover {
+            background-color:rgb(35, 175, 200);
+        }
+        .no-cvs-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #999;
+        }
+        .btn-back {
+            background-color:rgb(76, 130, 175);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-back:hover {
+            background-color:rgb(70, 185, 156);
+        }
+        .h1{
+            color: #007bff;
+        }   
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Liste de CVs</h1>
+
+    {% if cvs %}
+        <ul class="cv-list">
+            {% for cv in cvs %}
+                <li class="cv-item">
+                    <strong>{{ cv.titre }}</strong> 
+                    <p>{{ cv.description }}</p> <!-- Ajoutez d'autres champs pertinents si nécessaire -->
+                    
+                    <!-- Formulaire pour supprimer un CV -->
+                    <form method="POST" action="{% url 'lister_modifier_supprimer_cvs' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="cv_id" value="{{ cv.id }}">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-cvs-message">Vous n'avez pas encore de CV.</p>
+    {% endif %}
+
+    <a href="/" class="btn-back">Retour à l'accueil</a>
+</div>
+
+</body>
+</html>

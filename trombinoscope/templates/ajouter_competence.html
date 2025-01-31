@@ -1,0 +1,132 @@
+{% block content %}
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            color: #2e3a59;
+            margin: 0;
+            padding: 30px;
+            line-height: 1.6;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px; /* Agrandir le conteneur */
+            margin: 30px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header */
+        h2 {
+            color: #1d3557; /* Bleu foncé moderne */
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 4px solid #457b9d; /* Bleu doux */
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        /* Form Elements */
+        form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2e3a59;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #a8dadc; /* Vert pastel */
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #f8f9fa; /* Gris très clair */
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #457b9d; /* Bleu doux */
+            background-color: #ffffff;
+            box-shadow: 0 0 8px rgba(69, 123, 157, 0.3);
+            outline: none;
+        }
+
+        /* Button */
+        button {
+            display: inline-block;
+            background-color: #457b9d; /* Bleu doux */
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #1d3557; /* Bleu foncé */
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #1a293e; /* Bleu encore plus foncé */
+            transform: translateY(1px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+
+    <div class="container">
+        <h2>Ajout de compétence</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit">Enregistrer</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'trombinoscope/base_generic.html' %}
+
+{% block content %}
+  <h2>CV de {{ profile.etudiant.nom }} {{ profile.etudiant.prenom }}</h2>
+  <h3>Titre: {{ profile.titre }}</h3>
+  <p>Description: {{ profile.description }}</p>
+
+  <h4>Expériences professionnelles</h4>
+  <ul>
+    {% for experience in profile.experiences.all %}
+      <li>
+        <strong>{{ experience.poste }}</strong> chez {{ experience.entreprise }} ({{ experience.date_debut }} - {% if experience.date_fin %}{{ experience.date_fin }}{% else %}actuellement{% endif %})
+        <p>{{ experience.description }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h4>Formations</h4>
+  <ul>
+    {% for formation in profile.formations.all %}
+      <li>
+        <strong>{{ formation.diplome }}</strong> à {{ formation.etablissement }} ({{ formation.date_debut }} - {% if formation.date_fin %}{{ formation.date_fin }}{% else %}en cours{% endif %})
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h4>Langues</h4>
+  <ul>
+    {% for langue in profile.langues.all %}
+      <li>{{ langue.libelle }} - {{ langue.niveau }}</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Compétences</h4>
+  <ul>
+    {% for competence in profile.competences.all %}
+      <li>{{ competence.libelle }} ({{ competence.niveau }})</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Projets</h4>
+  <ul>
+    {% for projet in profile.projets.all %}
+      <li><strong>{{ projet.titre }}</strong> ({{ projet.date_debut }} - {% if projet.date_fin %}{{ projet.date_fin }}{% else %}en cours{% endif %})
+        <p>{{ projet.description }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'edit_cv' %}" class="btn btn-primary">Modifier votre CV</a>
+{% endblock %}

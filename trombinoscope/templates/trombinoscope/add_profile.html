@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Profil</title>
+    <link rel="stylesheet" href="{% static 'add_profile.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Ajouter un nouveau profil</h1>
+        {% if user.is_authenticated %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">Ajouter</button>
+        </form>
+        <a href="{% url 'index' %}" class="back-button">Retour au trombinoscope</a>
+        {% else %}
+        <p>Vous devez être connecté pour ajouter un profil.</p>
+        <a href="{% url 'login' %}" class="login-button">Se connecter</a>
+        {% endif %}
+    </div>
+</body>
+</html>
